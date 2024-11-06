@@ -20,4 +20,5 @@ yarn-error.log
 /.idea
 /.vscode
 **/.DS_Store
+src/README.md
 
