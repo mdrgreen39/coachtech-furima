@@ -1,0 +1,35 @@
+@media (max-width: 768px) {
+
+    html {
+        font-size: 14px;
+    }
+
+    .header {
+        flex-direction: column;
+        padding: 2rem;
+        height: 20rem
+    }
+
+
+    .header__container {
+        margin-left: 0;
+        padding-bottom: 3rem;
+    }
+
+    .hamburger-label {
+        top: 4rem;
+    }
+
+    .header-nav {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: -100vw;
+        transform: none;
+    }
+
+    .hamburger-input:checked~.header-nav {
+        left: 0;
+        transform: translate(0, -50%);
+    }
+}
