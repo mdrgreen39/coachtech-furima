@@ -8,9 +8,9 @@
     <title>coachtechフリマ</title>
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
     <link rel="stylesheet" href="{{ asset('css/common.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
@@ -23,10 +23,8 @@
 </head>
 
 <body>
-    <div id="app">
-
-        @yield('main')
-    </div>
+    <x-header />
+    @yield('main')
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
-window.Alpine = Alpine;
-Alpine.start();
+import 'alpinejs';
 
+import './search.js';
 
+import './hamburger-menu.js';
