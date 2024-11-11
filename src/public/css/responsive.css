@@ -12,6 +12,7 @@
     }
 
     #search-form input[type="text"] {
+        width: 20rem;
         margin-right: 2rem;
     }
 
@@ -105,14 +106,18 @@
 
     .menu__item:hover,
     .menu__item-btn--link:hover {
-        color: #477efe;
+        color: #308dd6;
         transform: scale(1.1);
     }
 
     .menu__item-link--btn:hover {
-        background-color: #477efe;
+        background-color: #308dd6;
         color: #ffffff;
         transform: scale(1.1);
+    }
+
+    .main {
+        /* margin: 8rem auto; */
     }
 
     .align-items-center {
@@ -178,5 +183,9 @@
     .hamburger-input:checked~.header-nav {
         left: 0;
         transform: translate(0, -50%);
+    }
+
+    .main {
+        margin: 8rem auto;
     }
 }

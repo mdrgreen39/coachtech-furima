@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ItemController::class, ('index')])->name('item.index');
 
 Route::get('/search', [ItemController::class, 'searchJson'])->name('search.json');
+
+Route::get('/test', function () {
+    return view('auth.register');
+});

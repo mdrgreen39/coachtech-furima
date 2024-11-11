@@ -78,6 +78,10 @@ input::placeholder {
 
 /* ヘッダー */
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     justify-content: space-between;
     height: 3.5rem;
     padding: 0 10rem;
@@ -156,6 +160,22 @@ input::placeholder {
 
 .main {
     width: 85%;
-    margin: 0 auto;
+    margin: 3.5rem auto;
     padding: 2.5rem 0;
+}
+
+.btn {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    background-color: #ff5555;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.19rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.5;
+    transform: scale(1.1);
 }
