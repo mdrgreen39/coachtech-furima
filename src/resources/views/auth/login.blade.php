@@ -5,9 +5,9 @@
 @endsection
 
 @section('main')
-<div class="main">
-    <h2 class="auth-form__heading">
-        ログイン
+<div class="main @if(request()->is('login') || request()->is('register') || request()->is('address')) main-range @endif">
+    <h2 class=" auth-form__heading">
+    ログイン
     </h2>
     <div class="auth-form">
         <form class="auth-form__form" action="/register" method="post" novalidate>
@@ -32,7 +32,7 @@
             </div>
             <button class="auth-form__btn btn" type="submit">ログインする</button>
         </form>
-        <a href="/login" class="auth-form__link">会員登録はこちら</a>
+        <a href="/register" class="auth-form__link">会員登録はこちら</a>
     </div>
 </div>
 @endsection

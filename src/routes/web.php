@@ -18,6 +18,11 @@ Route::get('/', [ItemController::class, ('index')])->name('item.index');
 
 Route::get('/search', [ItemController::class, 'searchJson'])->name('search.json');
 
+
+
+
+
+// テスト用ルート
 Route::get('/test', function () {
-    return view('auth.register');
+    // return view('auth.register');
 });

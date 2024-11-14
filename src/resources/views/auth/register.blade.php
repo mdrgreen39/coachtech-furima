@@ -5,7 +5,7 @@
 @endsection
 
 @section('main')
-<div class="main">
+<div class="main @if(request()->is('login') || request()->is('register') || request()->is('address')) main-range @endif">
     <h2 class="auth-form__heading">
         会員登録
     </h2>

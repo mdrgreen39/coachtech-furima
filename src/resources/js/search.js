@@ -1,31 +1,35 @@
-document.getElementById('search-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.getElementById('search-form');
+    const resultsDiv = document.getElementById('search-results');
+    const productList = document.getElementById('item-list');
 
-    var keyword = document.querySelector('input[name="keyword"]').value;
+    if (searchForm) {
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-    fetch('/search?keyword=' + encodeURIComponent(keyword))
-        .then(response => response.json())
-        .then(data => {
-            const resultsDiv = document.getElementById('search-results');
-            const productList = document.getElementById('item-list');
+            var keyword = document.querySelector('input[name="keyword"]').value;
 
-            resultsDiv.innerHTML = '';
+            fetch('/search?keyword=' + encodeURIComponent(keyword))
+                .then(response => response.json())
+                .then(data => {
+                    resultsDiv.innerHTML = '';
+                    if (data.length > 0) {
+                        data.forEach(imageUrl => {
+                            resultsDiv.innerHTML += `
+                                <div class="item">
+                                    <img src="${imageUrl}" alt="商品画像">
+                                </div>
+                            `;
+                        });
 
-            if (data.length > 0) {
-                data.forEach(imageUrl => {
-                    resultsDiv.innerHTML += `
-                        <div class="item">
-                            <img src="${imageUrl}" alt="商品画像">
-                        </div>
-                    `;
+                        productList.style.display = 'none';
+                        resultsDiv.style.display = 'block';
+                    } else {
+                        resultsDiv.innerHTML = '検索結果がありません。';
+                        resultsDiv.style.display = 'block';
+                        productList.style.display = 'block';
+                    }
                 });
-
-                productList.style.display = 'none';
-                resultsDiv.style.display = 'block';
-            } else {
-                resultsDiv.innerHTML = '検索結果がありません。';
-                resultsDiv.style.display = 'block';
-                productList.style.display = 'block';
-            }
         });
+    }
 });

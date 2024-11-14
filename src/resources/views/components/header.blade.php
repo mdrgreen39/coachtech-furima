@@ -1,5 +1,5 @@
 <header>
-    <div class="header flex align-items-center">
+    <div class="header flex align-items-center @if(request()->is('login') || request()->is('register') || request()->is('address')) fixed-height @endif">
         @if(request()->is('login') || request()->is('register'))
         <img class="header-logo" src="/img/logo.svg" alt="logo">
         @elseif(request()->is('sell') || request()->is('address'))
@@ -37,8 +37,8 @@
         </div>
         <nav class="header-nav">
             <ul class="flex align-items-center">
-                <li class="header-nav__item"><a href=" /login">ログイン</a></li>
-                <li class="header-nav__item"><a href="/register">会員登録</a></li>
+                <li class="header-nav__item"><a href="/login" target="_blank">ログイン</a></li>
+                <li class="header-nav__item"><a href="/register" target="_blank">会員登録</a></li>
                 <li class="header-nav__item-link--btn"><a href="">出品</a></li>
             </ul>
         </nav>
@@ -46,9 +46,9 @@
         @endif
     </div>
 
-    @if (session('massage'))
+    @if (session('message'))
     <div class="flash-message">
-        {{ session('massage') }}
+        {{ session('message') }}
     </div>
     @endif
 

@@ -154,6 +154,11 @@
         height: 8rem
     }
 
+    .fixed-height {
+        padding: 1rem;
+        height: 3.5rem;
+    }
+
     .header-logo {
         margin-bottom: 0.5rem;
     }
@@ -187,5 +192,9 @@
 
     .main {
         margin: 8rem auto;
+    }
+
+    .main-range {
+        margin: 3.5rem auto;
     }
 }

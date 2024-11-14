@@ -61,12 +61,14 @@ input::placeholder {
 .flash-message {
     text-align: center;
     background-color: #477efe;
-    padding: 0.25rem 0;
+    margin-top: 3.5rem;
+    padding: 1rem 0;
     color: #fff;
+    opacity: 0,7;
 }
 
-.error-massage {
-    margin-top: 0.5rem;
+.error-message {
+    margin-top: 0.25rem;
     text-align: left;
     color: #ff5555;
 }
@@ -87,6 +89,7 @@ input::placeholder {
     padding: 0 10rem;
     background-color: #000000;
     color: #ffffff;
+    z-index: 10;
 }
 
 .header-logo {
