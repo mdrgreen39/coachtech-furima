@@ -6,18 +6,23 @@
 
 @section('main')
 <div class="main">
-    <div class="link-group align-items-center flex">
-        <a href="">おすすめ</a>
-        <a href="">マイリスト</a>
+    <div class="item-list">
+        <ul class="item-tabs">
+            <li class="item-tab">
+                <a href="{{ route('home', ['tab' => 'recommend']) }}"
+                    class="item-link {{ request('tab') === 'recommend' ? 'active' : '' }}">おすすめ</a>
+            </li>
+            <li class="item-tab">
+                <a href="{{ route('home', ['tab' => 'wishlist']) }}"
+                    class="item-link {{ request('tab') === 'wishlist' ? 'active' : '' }}">マイリスト</a>
+            </li>
+        </ul>
 
-    </div>
-    <div class="flex wrap items">
-        <div id="item-list">
-            
+        @include('components.item_grid', ['items' => $items])
+
+        <div id="search-results" style="display:none;">
+            @include('components.item_grid', ['items' => $items])
         </div>
-
-        <div id="search-results" style="display:none;"></div>
-
     </div>
 </div>
 @endsection

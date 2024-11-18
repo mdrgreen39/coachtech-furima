@@ -22,7 +22,7 @@
     padding: 1.5rem 0;
 }
 
-.auth-form__group-text {
+.auth-form__group-label {
     font-weight: bold;
     text-align: left;
 }
