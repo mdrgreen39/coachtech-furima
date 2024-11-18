@@ -10,7 +10,7 @@
         ログイン
     </h2>
     <div class="auth-form">
-        <form class="auth-form__form" action="/register" method="post" novalidate>
+        <form class="auth-form__form" action="/login" method="post" novalidate>
             @csrf
             <div class="auth-form__group">
                 <label for="email" class="auth-form__group-label">メールアドレス</label>

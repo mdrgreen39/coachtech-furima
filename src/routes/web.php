@@ -3,6 +3,7 @@
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,10 @@ Route::get('/', [ItemController::class, ('index')])->name('item.index');
 Route::get('/search', [ItemController::class, 'searchJson'])->name('search.json');
 
 
-Route::get('/mypage/profile', [UsersController::class, 'editProfile'])->name('mypage.profile.edit');
+Route::middleware('auth')->group(function () {
+    Route::get('/mypage/profile', [UsersController::class, 'editProfile'])->name('mypage.profile.edit');
+    Route::post('/mypage/profile', [UsersController::class, 'updateProfile'])->name('mypage.profile.update');
+});
 
 
 
