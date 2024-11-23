@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
+            $table->unsignedInteger('price');
+            $table->text('description');
+            $table->string('image', 255);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('image', 255)->nullable();
-            $table->string('postcode', 8)->nullable();
-            $table->string('address', 255)->nullable();
-            $table->string('building', 255)->nullable();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('items');
     }
 };

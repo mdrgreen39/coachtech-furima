@@ -1,13 +1,13 @@
 <header>
-    <div class="header flex align-items-center @if(request()->is('login') || request()->is('register') || request()->is('address')) fixed-height @endif">
+    <div class="header flex align-items-center @if(request()->is('login') || request()->is('register')) fixed-height @endif">
         @if(request()->is('login') || request()->is('register'))
         <a href="/">
-            <img class="header-logo" src="/img/logo.svg" alt="logo">
+            <img class="header-logo" src="/images/logos/logo.svg" alt="logo">
         </a>
         @else
         @auth
         <a href="/">
-            <img class="header-logo" src="/img/logo.svg" alt="logo">
+            <img class="header-logo" src="/images/logos/logo.svg" alt="logo">
         </a>
         <div class="flex align-items-center">
             <form id="search-form" action="{{ route('search.json') }}" method="GET">
@@ -29,7 +29,7 @@
             </ul>
         </nav>
         @else
-        <img class="header-logo" src="/img/logo.svg" alt="logo">
+        <img class="header-logo" src="/images/logos/logo.svg" alt="logo">
         <div class="flex align-items-center">
             <form id="search-form" action="{{ route('search.json') }}" method="GET">
                 <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request()->input('keyword') }}">

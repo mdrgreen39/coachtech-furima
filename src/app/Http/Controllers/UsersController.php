@@ -44,13 +44,13 @@ class UsersController extends Controller
 
         $profile = $user->profile ?: new Profile();
 
-        if ($request->hasFile('img_url')) {
+        if ($request->hasFile('image')) {
             $path = 'profile_images/' . $user->id . '.png';
 
             if (app()->environment('production')) {
-                Storage::disk('s3')->put($path, file_get_contents($request->file('img_url')));
+                Storage::disk('s3')->put($path, file_get_contents($request->file('image')));
             } else {
-                Storage::disk('public')->put($path, file_get_contents($request->file('img_url')));
+                Storage::disk('public')->put($path, file_get_contents($request->file('image')));
             }
 
             if ($profile->img_url) {
