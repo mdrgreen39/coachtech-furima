@@ -29,7 +29,9 @@
             </ul>
         </nav>
         @else
-        <img class="header-logo" src="/images/logos/logo.svg" alt="logo">
+        <a href="/">
+            <img class="header-logo" src="/images/logos/logo.svg" alt="logo">
+        </a>
         <div class="flex align-items-center">
             <form id="search-form" action="{{ route('search.json') }}" method="GET">
                 <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request()->input('keyword') }}">

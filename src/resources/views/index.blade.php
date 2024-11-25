@@ -21,7 +21,7 @@
     </div>
 
     <div id="search-results" style="display:none;">
-        @include('components.item-grid', ['items' => $items])
+
     </div>
 </div>
 @endsection

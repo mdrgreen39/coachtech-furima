@@ -6,9 +6,9 @@
 
 @section('main')
 <div class="main @if(request()->is('login') || request()->is('register') || request()->is('address')) main-range @endif">
-    <h2 class=" auth-form__heading">
+    <h1 class=" auth-form__heading">
         ログイン
-    </h2>
+    </h1>
     <div class="auth-form">
         <form class="auth-form__form" action="/login" method="post" novalidate>
             @csrf

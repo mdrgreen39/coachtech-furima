@@ -34,7 +34,12 @@
     background-color: #f1f1f1;
 }
 
-.item {
+.item-wrapper {
+    width: 85%;
+    margin: 3rem auto;
+}
+
+#items-list .item {
     width: 85%;
     margin: 3rem auto;
     display: grid;
@@ -54,4 +59,26 @@
     object-fit: cover;
     display: block;
     aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.item-card__image:hover {
+    opacity: 0.5;
+}
+
+#search-results .item {
+    width: 85%;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 3rem;
+    grid-row-gap: 4rem;
+}
+
+#search-results {
+    display: none;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-top: 0.13rem solid #ccc;
+    background-color: #f9f9f9;
 }

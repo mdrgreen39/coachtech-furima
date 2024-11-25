@@ -37,6 +37,7 @@ class UsersController extends Controller
 
     }
 
+    // プロフィール編集処理
     public function updateProfile(ProfileRequest $request)
     {
         $user = Auth::user();
@@ -76,5 +77,4 @@ class UsersController extends Controller
 
         return redirect()->route('mypage', $user->id);
     }
-
 }

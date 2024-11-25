@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ItemController;
-use App\Http\Controllers\UsersController;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UsersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +20,22 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', [ItemController::class, ('index')])->name('item.index');
+Route::get('/items/{item}', [ItemController::class, 'show'])->name('item.detail');
 
-Route::get('/search', [ItemController::class, 'searchJson'])->name('search.json');
 
+
+Route::get('/search.json', [ItemController::class, 'searchJson'])->name('search.json');
+
+Route::get('/check-auth', function () {
+    return response()->json(['authenticated' => Auth::check()]);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage/profile', [UsersController::class, 'editProfile'])->name('mypage.profile.edit');
     Route::post('/mypage/profile', [UsersController::class, 'updateProfile'])->name('mypage.profile.update');
+    Route::post('/items/{item}/toggle-like', [ItemController::class, 'toggleLike'])->name('item.toggleLike');
+
+
 });
 
 

@@ -73,7 +73,7 @@ input::placeholder {
     color: #ff5555;
 }
 
-.result-massage {
+.result-message {
     text-align: center;
     color: #ff5555
 }
@@ -96,6 +96,12 @@ input::placeholder {
     width: auto;
     height: 1.7rem;
     transform: scaleY(0.9);
+    cursor: pointer;
+}
+
+.header-logo:hover {
+    opacity: 0.5;
+    transform: scale(1.1);
 }
 
 .header-nav__item-btn--link{
