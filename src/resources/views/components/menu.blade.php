@@ -4,7 +4,7 @@
         @csrf
         <button class="menu__item-btn--link" type="submit">ログアウト</button>
     </form>
-    <a href="" class="menu__item">マイページ</a>
+    <a href="{{ route('user.mypage') }}" class="menu__item">マイページ</a>
     <a class="menu__item-link--btn" href="">出品</a>
     @else
     <a href="/login" class="menu__item">ログイン</a>

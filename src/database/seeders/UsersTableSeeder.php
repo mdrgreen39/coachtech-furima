@@ -34,6 +34,14 @@ class UsersTableSeeder extends Seeder
             // $userOne->givePermissionTo('user');
             // $userOne->update(['email_verified_at' => now()]);
 
+            User::create([
+                'email' => 'test1@example.com',
+                'password' => Hash::make('11111111'),
+            ]);
+            // $userOne->assignRole('user');
+            // $userOne->givePermissionTo('user');
+            // $userOne->update(['email_verified_at' => now()]);
+
             // 他の一般ユーザーをランダムに生成
             // User::factory(9)->create()->each(function ($user) {
             // $user->assignRole('user');

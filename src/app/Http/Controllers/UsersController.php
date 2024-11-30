@@ -18,15 +18,51 @@ class UsersController extends Controller
         // $this->middleware('role:user');
     }
 
-    public function mypage()
+    // マイページ表示
+    public function mypage(Request $request)
     {
-        $user = Auth::user();
-        $profile = $user->profile;
+        $currentTab = $request->query('tab', 'recommend');
+        $items = $this->getItemsByTab($currentTab);
 
-        $items = Item::all();
+        if ($request->ajax()) {
+            $html = view('components.item-grid', compact('items'))->render();
+            return response()->json(['items_html' => $html]);
+        } else {
+            $user = Auth::user();
+            $profile = $user->profile;
 
-        return view('mypage', compact('user', 'profile', 'items'));
+            return view('mypage', compact('user', 'profile', 'items', 'currentTab'));
+        }
     }
+
+    // タブ切り替え処理
+    protected function getItemsByTab($tab)
+    {
+        if ($tab === 'recommend') {
+            return Item::where('user_id', auth()->id())->get();
+        } elseif ($tab === 'purchase') {
+            return Item::whereHas('users', function ($query) {
+                $query->where('user_id', auth()->id());
+            })->get();
+        } elseif ($tab === 'wishlist') {
+            return Item::whereIn('id', function ($query) {
+                $query->select('item_id')
+                ->from('likes')
+                ->where('user_id', auth()->id());
+            })->get();
+        }
+
+        return Item::where('user_id', auth()->id())->get();
+    }
+
+    public function getMypageItems(Request $request)
+    {
+        // ここでマイページ用のアイテムを取得
+        $items = Item::where('user_id', auth()->id())->get();
+
+        return response()->json($items);
+    }
+
 
     // プロフィール編集画面を表示
     public function editProfile()

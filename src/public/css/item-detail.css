@@ -37,7 +37,7 @@
     cursor: pointer;
 }
 
-.rating-star .fa-star.liked {
+.rating-star .fa-solid {
     color: #FFD700;
 }
 
@@ -47,5 +47,5 @@
 }
 
 .rating-comment .fa-comment:hover {
-    color: #477efe;
+    opacity: 0.5;
 }

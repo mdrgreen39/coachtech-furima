@@ -24,7 +24,7 @@
                         <button class="header-nav__item-btn--link" type="submit">ログアウト</button>
                     </form>
                 </li>
-                <li class="header-nav__item"><a href="">マイページ</a></li>
+                <li class="header-nav__item"><a href="{{ route('user.mypage') }}">マイページ</a></li>
                 <li class="header-nav__item-link--btn"><a href="">出品</a></li>
             </ul>
         </nav>

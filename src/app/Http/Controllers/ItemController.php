@@ -12,7 +12,8 @@ class ItemController extends Controller
     // トップページ表示
     public function index(Request $request)
     {
-        $currentTab = $request->query('tab', null);
+        // デフォルトで'recommend'タブを選択
+        $currentTab = $request->query('tab', 'recommend');
         $items = $this->getItemsByTab($currentTab);
 
         if ($request->ajax()) {
@@ -29,21 +30,21 @@ class ItemController extends Controller
         if ($tab === 'recommend') {
             return Item::where('condition_id', '<', 3)->get();
         } elseif ($tab === 'wishlist') {
-            return Item::where('user_id', auth()->id())->get();
+            return Item::whereIn('id', function ($query) {
+                $query->select('item_id')
+                    ->from('likes')
+                    ->where('user_id', auth()->id());
+            })->get();
         }
 
-        return Item::all();
+        return Item::where('condition_id', '<', 3)->get();
     }
 
-    // 商品詳細ページ表示
-    public function show($item_id)
+    // 検索クリア後ページ表示処理
+    public function getRecommendItems()
     {
-        $item = Cache::remember("item_{$item_id}", 60, function () use ($item_id) {
-            return Item::findOrFail($item_id);
-        });
-        $isLiked = $item->likes->contains('user_id', auth()->id());
-
-        return view('item-detail', compact('item', 'isLiked'));
+        $items = $this->getItemsByTab('recommend');
+        return response()->json($items);
     }
 
     // 検索処理
@@ -53,9 +54,14 @@ class ItemController extends Controller
 
         $products = Item::where('name', 'like', '%' . $keyword . '%')
         ->orWhere('description', 'like', '%' . $keyword . '%')
+        ->orWhereHas('category', function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
+        ->orWhereHas('condition', function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
         ->get()
             ->map(function ($item) {
-                // 必要なフィールドのみを返す
                 return [
                     'id' => $item->id,
                     'name' => $item->name,
@@ -66,7 +72,30 @@ class ItemController extends Controller
         return response()->json($products);
     }
 
-    // お気に入り追加・解除処理
+    // 商品詳細ページ表示
+    public function show($item_id)
+    {
+        $item = Item::with('likes')->findOrFail($item_id); // キャッシュを削除
+        $isLiked = auth()->check() && $item->likes->contains('user_id', auth()->id());
+
+        return view('item-detail', compact('item', 'isLiked'));
+    }
+
+    public function getItemDetail($item_id)
+    {
+        // 商品と「いいね」の状態を取得
+        $item = Item::with('likes')->findOrFail($item_id);
+        $isLiked = auth()->check() && $item->likes->contains('user_id', auth()->id());
+
+        // 商品情報と「いいね」の状態を返す
+        return response()->json([
+            'item' => $item,
+            'isLiked' => $isLiked,
+        ]);
+    }
+
+
+    // いいね追加・解除処理
     public function toggleLike(Item $item)
     {
         $user = auth()->user();
@@ -87,9 +116,27 @@ class ItemController extends Controller
 
         $likesCount = $item->likes()->count();
 
+        $isLiked = $status === 'liked';
+
         return response()->json([
             'status' => $status,
             'likes_count' => $likesCount,
+            'is_liked' => $isLiked,
         ]);
     }
+
+    // いいね状態収得
+    public function getLikeStatus(Item $item)
+    {
+
+        if (!auth()->check()) {
+            // ログインしていない場合は`false`を返す
+            return response()->json(['is_liked' => false]);
+        }
+
+        $isLiked = $item->likes()->where('user_id', auth()->id())->exists();
+
+        return response()->json(['is_liked' => $isLiked]);
+    }
+
 }

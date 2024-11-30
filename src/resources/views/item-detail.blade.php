@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/item-detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
 
 @section('main')
@@ -15,10 +16,11 @@
             <p class="item-detail__price">¥{{ number_format($item->price) }}(値段)</p>
             <div class="item-detail__rating flex align-items-center">
                 <div class="rating-star">
-                    <i class="fa-regular fa-star fa-xl {{ $item->likes->contains('user_id', auth()->id()) ? 'liked' : '' }}" data-item-id="{{ $item->id }}"></i>
+                    <i class="fa-regular fa-star fa-xl {{ $isLiked ? 'fa-solid fa-star fa-xl' : 'fa-regular fa-star fa-xl' }}"
+                        data-item-id="{{ $item->id }}"
+                        data-is-liked="{{ $isLiked ? 'true' : 'false' }}"></i>
                     <span class="count" id="like-count-{{ $item->id }}">{{ $item->likes->count() }}</span>
                 </div>
-
                 <div class="rating-comment">
                     <a href="" class="fa-regular fa-comment fa-xl"></a>
                     <span class="count" id="comment-count">0</span>
@@ -37,6 +39,9 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div id="search-results" style="display:none;">
+
     </div>
 </div>
 @endsection

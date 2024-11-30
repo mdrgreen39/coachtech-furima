@@ -5,45 +5,35 @@ function isAuthenticated() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const stars = document.querySelectorAll('.rating-star i');
+    const stars = document.querySelectorAll('.fa-star');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    stars.forEach(star => {
-        star.addEventListener('click', function () {
-            const itemId = this.getAttribute('data-item-id');
+    isAuthenticated().then(authenticated => {
+        if (authenticated) {
+            stars.forEach(star => {
+                const itemId = star.getAttribute('data-item-id');
 
-            isAuthenticated().then(authenticated => {
-                if (authenticated) {
-                    toggleLike(itemId, this);
-                } else {
-                    window.location.href = '/login';
-                }
+                fetch(`/items/${itemId}/like-status`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.is_liked) {
+                        star.classList.add('fa-solid');
+                        star.classList.remove('fa-regular');
+                    } else {
+                        star.classList.add('fa-regular');
+                        star.classList.remove('fa-solid');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
             });
-        });
+        } else {
+            console.log('ログインしていないため、いいねの状態を取得できません');
+        }
     });
-
-    function toggleLike(itemId, starElement) {
-        fetch(`/items/${itemId}/toggle-like`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({
-                item_id: itemId
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'liked') {
-                starElement.classList.add('liked');
-            } else {
-                starElement.classList.remove('liked');
-            }
-            const countElement = document.getElementById('like-count-' + itemId);
-            countElement.textContent = data.likes_count;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
 });
+
