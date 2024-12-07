@@ -68,9 +68,15 @@ input::placeholder {
 }
 
 .error-message {
-    margin-top: 0.25rem;
+    margin: 0.25rem 0;
     text-align: left;
     color: #ff5555;
+}
+
+.success-message {
+    margin: 0.25rem 0;
+    text-align: left;
+    color: #477efe;
 }
 
 .result-message {
@@ -179,6 +185,7 @@ input::placeholder {
     padding: 0.5rem 1rem;
     background-color: #ff5555;
     color: #ffffff;
+    font-weight: bold;
     border: none;
     border-radius: 0.19rem;
     cursor: pointer;

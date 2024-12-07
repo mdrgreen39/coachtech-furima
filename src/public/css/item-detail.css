@@ -1,20 +1,46 @@
 .item-detail {
-    display: flex;
-    justify-content: space-between;
+    align-items: flex-start;
     margin-top: 5rem;
-    padding: 2.5rem 1rem;
+    padding: 1.5rem 5rem;
 }
 
-.item-detail__image-container,
-.item-detail__info {
-    max-width: 40%;
+/* 商品画像の設定 */
+.item-detail__image-container {
+    flex: 0 0 auto;
+    max-width: 400px;
+    max-height: 400px;
+    overflow: hidden;
 }
 
-.item-card__image {
+.item-detail__image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
+    object-fit: contain;
+}
+
+.item-detail__content {
+    width: 25rem;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.item-detail__info {
+    width: 25rem;
+    flex-direction: column;
+    margin-left: 10rem;
+    gap: 1rem;
+}
+
+/* 商品名 */
+.item-detail__name {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+/* 価格のスタイル */
+.item-detail__price {
+    font-size: 1.5rem;
+    color: #333;
 }
 
 .item-detail__rating {
@@ -48,4 +74,41 @@
 
 .rating-comment .fa-comment:hover {
     opacity: 0.5;
+}
+
+/* 太字にしたい部分（strong）を設定 */
+.item-detail__details ul li strong {
+    font-weight: bold;
+    margin-right: 2rem;
+    /* 強調テキストとスパンの間隔 */
+}
+
+.item-detail__details .category-span {
+    background-color: #d9d9d9;
+    /* 灰色の背景 */
+    padding: 0.3rem 0.5rem;
+    /* 内側の余白 */
+    border-radius: 10rem;
+    /* 角を丸める */
+}
+
+
+
+.item-detail__description,
+.item-detail__details {
+    margin-bottom: 2rem;
+    /* 下に余白を追加 */
+}
+
+/* ヘッダー（h2）とその下のコンテンツの間隔を調整 */
+.item-detail__description h2,
+.item-detail__details h2 {
+    margin-bottom: 1rem;
+    /* ヘッダーの下に余白 */
+}
+
+/* リスト内の各項目の間隔を調整 */
+.item-detail__details ul li {
+    margin: 2rem 0;
+    /* 各リストアイテムの下に余白 */
 }

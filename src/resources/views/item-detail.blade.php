@@ -7,11 +7,11 @@
 
 @section('main')
 <div class="main">
-    <div class="item-detail flex">
+    <div class="item-detail flex center">
         <div class="item-detail__image-container">
             <img class="item-detail__image" src="{{ $item->image_url }}" alt="{{ $item->name }}">
         </div>
-        <div class="item-detail__info">
+        <div class="item-detail__info flex">
             <h1 class="item-detail__name">{{ $item->name }}</h1>
             <p class="item-detail__price">¥{{ number_format($item->price) }}(値段)</p>
             <div class="item-detail__rating flex align-items-center">
@@ -22,8 +22,11 @@
                     <span class="count" id="like-count-{{ $item->id }}">{{ $item->likes->count() }}</span>
                 </div>
                 <div class="rating-comment">
-                    <a href="" class="fa-regular fa-comment fa-xl"></a>
-                    <span class="count" id="comment-count">0</span>
+                    <a href="{{ route('items.comments.show', $item->id) }}">
+                        <i class="fa-regular fa-comment fa-xl"></i>
+                    </a>
+                    <span class="count" id="comment-count">{{ $item->comments->count() }}</span> <!-- 初期値はDBから取得 -->
+
                 </div>
             </div>
             <button class="item-detail__buy-button btn">購入する</button>
@@ -34,13 +37,19 @@
             <div class="item-detail__details">
                 <h2>商品の情報</h2>
                 <ul>
-                    <li>カテゴリー: {{ $item->category->name }}</li>
-                    <li>商品の状態: {{ $item->condition->name }}</li>
+                    <li>
+                        <strong>カテゴリー</strong>
+                        <span class="category-span">{{ $item->category->name }}</span>
+                    </li>
+                    <li>
+                        <strong>商品の状態</strong>
+                        <span>{{ $item->condition->condition }}</span>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="search-results" style="display:none;">
+    <div id=" search-results" style="display:none;">
 
     </div>
 </div>

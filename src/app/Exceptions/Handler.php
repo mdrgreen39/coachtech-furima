@@ -27,4 +27,20 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        // リクエストがAjaxの場合、バリデーションエラーをJSONで返す
+        if ($exception instanceof \Illuminate\Validation\ValidationException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => $exception->getMessage(),
+                    'errors' => $exception->errors(),
+                ], 422);
+            }
+        }
+
+        return parent::render($request, $exception);
+    }
+
 }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Item;
+use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 
 class ItemController extends Controller
 {
@@ -81,19 +83,17 @@ class ItemController extends Controller
         return view('item-detail', compact('item', 'isLiked'));
     }
 
+    // 検索クリア後の商品詳細ページ表示処理
     public function getItemDetail($item_id)
     {
-        // 商品と「いいね」の状態を取得
         $item = Item::with('likes')->findOrFail($item_id);
         $isLiked = auth()->check() && $item->likes->contains('user_id', auth()->id());
 
-        // 商品情報と「いいね」の状態を返す
         return response()->json([
             'item' => $item,
             'isLiked' => $isLiked,
         ]);
     }
-
 
     // いいね追加・解除処理
     public function toggleLike(Item $item)
@@ -130,13 +130,91 @@ class ItemController extends Controller
     {
 
         if (!auth()->check()) {
-            // ログインしていない場合は`false`を返す
             return response()->json(['is_liked' => false]);
         }
 
         $isLiked = $item->likes()->where('user_id', auth()->id())->exists();
+        $likesCount = $item->likes()->count();
 
-        return response()->json(['is_liked' => $isLiked]);
+        return response()->json([
+            'is_liked' => $isLiked,
+            'likes_count' => $likesCount
+        ]);
     }
+
+    // コメントページ表示
+    public function comments($id)
+    {
+        $item = Item::with(['comments.user', 'likes'])->findOrFail($id);
+
+        // ユーザーのプロフィール情報を取得
+        $userProfile = auth()->user()->profile;
+
+        // プロフィール画像のURLを生成（環境に応じて）
+        $profileImageUrl = null;
+        if ($userProfile && $userProfile->img_url
+        ) {
+            if (config('filesystems.default') == 's3') {
+                // 本番環境（S3）でのURL
+                $profileImageUrl = Storage::disk('s3')->url($userProfile->img_url);
+            } else {
+                // ローカル環境（public）でのURL
+                $profileImageUrl = Storage::disk('public')->url($userProfile->img_url);
+            }
+        }
+
+        // いいねの状態
+        $isLiked = auth()->check() && $item->likes->contains('user_id', auth()->id());
+
+        // コメント数
+        $commentCount = $item->comments->count();
+
+        // ビューに渡すデータ
+        return view('comment', compact('item', 'isLiked', 'commentCount', 'profileImageUrl', 'userProfile'));
+    }
+
+
+    // コメント処理
+    public function storeComment(CommentRequest $request, $itemId)
+    {
+        $item = Item::findOrFail($itemId);
+
+        if ($item->user_id === auth()->id()) {
+            return response()->json([
+                'success' => false,
+                'message' => '自分が出品した商品にはコメントできません',
+            ], 403);
+        }
+
+        try {
+            $comment = new Comment();
+            $comment->user_id = auth()->id();
+            $comment->item_id = $item->id;
+            $comment->comment = $request->comment;
+            $comment->save();
+
+            $commentCount = $item->comments->count();
+
+            return response()->json([
+                'success' => true,
+                'comment' => $comment->comment,
+                'message' => 'コメントを送信しました',
+                'comment_count' => $commentCount,
+                'profileImageUrl' => $comment->user->profile_image_url ?? null,
+                'userName' => $comment->user->name ?? '名前',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => '予期しないエラーが発生しました。',
+            ], 500);
+        }
+    }
+
+
+
+
+
+
 
 }

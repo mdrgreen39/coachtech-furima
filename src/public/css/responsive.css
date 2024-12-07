@@ -125,6 +125,35 @@
         grid-row-gap: 1.5rem;
     }
 
+        .item-detail {
+            flex-direction: column;
+            /* 縦並びに変更 */
+            align-items: center;
+            padding: 0;
+            /* 中央寄せ */
+            gap: 1rem;
+            /* 要素間の間隔を調整 */
+        }
+
+    .item-detail__image-container {
+        width: 100%;
+        /* 画像を親要素に合わせる */
+        height: auto;
+        /* 高さを自動調整 */
+        max-width: 300px;
+        /* 最大幅を指定 */
+    }
+
+    .item-detail__info {
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    #comments-section {
+        max-width: 100%;
+        margin-left: 0rem;
+    }
+
     .main {
         /* margin: 8rem auto; */
     }
@@ -221,4 +250,5 @@
         grid-row-gap: 1.5rem;
     }
 
+    
 }

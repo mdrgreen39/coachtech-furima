@@ -21,9 +21,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 
-Route::post('/login', [AuthenticatedSessionController::class, 'authenticated'])
-    ->name('login');
-
 Route::get('/', [ItemController::class, ('index')])->name('item.index');
 Route::get('/items/{item}', [ItemController::class, 'show'])->name('item.detail');
 Route::get('/items/{item_id}/detail.json', [ItemController::class, 'getItemDetail']);
@@ -41,13 +38,16 @@ Route::get('/check-auth', function () {
     return response()->json(['authenticated' => Auth::check()]);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/mypage', [UsersController::class, 'mypage'])->name('user.mypage');
     Route::get('/mypage/profile/edit', [UsersController::class, 'editProfile'])->name('mypage.profile.edit');
     Route::post('/mypage/profile/update', [UsersController::class, 'updateProfile'])->name('mypage.profile.update');
     Route::post('/items/{item}/toggle-like', [ItemController::class, 'toggleLike'])->name('item.toggleLike');
     Route::get('/items/{item}/like-status', [ItemController::class, 'getLikeStatus']);
     Route::get('/mypage/recommend-items.json', [UsersController::class, 'getMypageItems']);
+    Route::get('/items/{id}/comments', [ItemController::class, 'comments'])->name('items.comments.show');
+    Route::post('/items/{id}/comments', [ItemController::class, 'storeComment'])->name('items.comments.store');
+
 
 
 
