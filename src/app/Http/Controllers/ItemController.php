@@ -147,29 +147,23 @@ class ItemController extends Controller
     {
         $item = Item::with(['comments.user', 'likes'])->findOrFail($id);
 
-        // ユーザーのプロフィール情報を取得
         $userProfile = auth()->user()->profile;
 
-        // プロフィール画像のURLを生成（環境に応じて）
         $profileImageUrl = null;
-        if ($userProfile && $userProfile->img_url
+        if ($userProfile && $userProfile->image
         ) {
             if (config('filesystems.default') == 's3') {
-                // 本番環境（S3）でのURL
-                $profileImageUrl = Storage::disk('s3')->url($userProfile->img_url);
+                $profileImageUrl = Storage::disk('s3')->url($userProfile->image);
             } else {
-                // ローカル環境（public）でのURL
-                $profileImageUrl = Storage::disk('public')->url($userProfile->img_url);
+                $profileImageUrl = Storage::disk('public')->url($userProfile->image);
             }
         }
 
         // いいねの状態
         $isLiked = auth()->check() && $item->likes->contains('user_id', auth()->id());
 
-        // コメント数
         $commentCount = $item->comments->count();
 
-        // ビューに渡すデータ
         return view('comment', compact('item', 'isLiked', 'commentCount', 'profileImageUrl', 'userProfile'));
     }
 

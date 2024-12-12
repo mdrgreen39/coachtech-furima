@@ -35,7 +35,7 @@
                     <div class="comment-item">
                         <div class="comment-author flex align-items-center">
                             @if ($profileImageUrl)
-                            <img class="comment-author__image" src="{{ $profileImageUrl }}" alt="{{ $user->name }}'s profile image">
+                            <img class="comment-author__image" src="{{ $profileImageUrl }}" alt="プロフィール画像">
                             @else
                             <div class="comment-author__icon flex align-items-center center">
                                 <i class="fa fa-camera"></i>

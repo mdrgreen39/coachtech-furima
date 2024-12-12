@@ -1,4 +1,13 @@
+/* マイページ・プロフィール編集共通 */
+.fa-camera {
+    font-size: 48px;
+    color: gray;
+}
 
+/* プロフィール編集 */
+.profile-upload-container {
+    width: 100%;
+}
 .profile-upload__heading {
     margin: 1rem;
     font-size: 2rem;
@@ -18,19 +27,41 @@
     width: 100%;
 }
 
-.profile-upload__group {
-    width: 100%;
-    padding: 1.5rem 0;
-}
 
 .profile-upload__image {
     width: 100%;
-    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    /* padding: 1.5rem 10rem; */
+}
+
+/* .profile-upload__user-name { */
+    /* margin: 1rem; */
+    /* font-size: 2rem; */
+    /* font-weight: bold; */
+/* } */
+
+
+
+
+.profile-upload__image-display {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: none;
+    overflow: hidden;
+    background-color: #d9d9d9;
+    position: relative;
+}
+
+.profile-upload__image-display--preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .profile-upload__image-label {
     width: 10rem;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
     padding: 0.5rem 1rem;
     text-align: center;
     background-color: #ffffff;
@@ -52,21 +83,9 @@
     display: none;
 }
 
-.profile-upload__image-display {
-    display: inline-block;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
-    border: none;
-    overflow: hidden;
-    background-color: #d9d9d9;
-    position: relative;
-}
-
-.profile-upload__image-display--preview {
+.profile-upload__group {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    padding: 1.5rem 0;
 }
 
 .profile-upload__group-label {
@@ -85,19 +104,59 @@
     border: 0.13rem solid #5f5f5f;
 }
 
-.profile-upload__link {
-    display: block;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #308dd6;
-    cursor: pointer;
-}
+/* .profile-upload__link { */
+    /* display: block; */
+    /* text-align: center; */
+    /* font-size: 0.75rem; */
+    /* color: #308dd6; */
+    /* cursor: pointer; */
+/* } */
 
-.profile-upload__link:hover {
-    color: #0b2a98;
-    transform: scale(1.1);
-}
+/* .profile-upload__link:hover { */
+    /* color: #0b2a98; */
+    /* transform: scale(1.1); */
+/* } */
 
 .profile-upload__btn {
     margin: 2rem 0 1rem;
+}
+
+
+/* .profile-upload__input { */
+    /* margin-left: auto; */
+/* } */
+
+/* マイページ */
+.mypage-profile__image {
+    width: 100%;
+    margin-bottom: 3rem;
+    padding: 1.5rem 10rem;
+}
+
+.mypage-profile__image-display {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: none;
+    overflow: hidden;
+    background-color: #d9d9d9;
+    position: relative;
+}
+
+.mypage-profile__image-display--preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.mypage-profile__user-name {
+    margin: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.mypage-profile__edit-btn {
+    margin-left: auto;
 }

@@ -57,7 +57,6 @@ class UsersController extends Controller
 
     public function getMypageItems(Request $request)
     {
-        // ここでマイページ用のアイテムを取得
         $items = Item::where('user_id', auth()->id())->get();
 
         return response()->json($items);
@@ -67,7 +66,11 @@ class UsersController extends Controller
     // プロフィール編集画面を表示
     public function editProfile()
     {
-        $user = Auth::user()->profile;
+        $profile = Auth::user()->profile;
+
+        if (!$profile) {
+            $profile = new Profile(); // 空のプロフィールオブジェクトを作成
+        }
 
         return view('profile', compact('profile'));
 
@@ -83,10 +86,16 @@ class UsersController extends Controller
         $profile = $user->profile ?: new Profile();
 
         if ($request->hasFile('image')) {
-            // 画像の保存先パス（S3の場合、profiles/{user_id}.png）
-            $path = 'profile_images/' . $user->id . '.png';
 
-            // 本番環境ならS3に保存、開発環境ならローカルのpublicディスクに保存
+            $directory = 'profile_images/';
+            $path = $directory . $user->id . '.png';
+
+            if (app()->environment('local')) {
+                if (!Storage::disk('public')->exists($directory)) {
+                    Storage::disk('public')->makeDirectory($directory);
+                }
+            }
+
             if (app()->environment('production')) {
                 Storage::disk('s3')->put($path, file_get_contents($request->file('image')));
             } else {
@@ -94,12 +103,12 @@ class UsersController extends Controller
             }
 
             // すでにプロフィール画像が保存されていれば削除
-            if ($profile->img_url) {
-                Storage::delete($profile->img_url);
+            if ($profile->image) {
+                Storage::delete($profile->image);
             }
 
             // 新しい画像のパスをデータベースに保存
-            $profile->img_url = $path;
+            $profile->image = $path;
         }
 
         // プロフィール情報を更新
@@ -119,7 +128,7 @@ class UsersController extends Controller
         }
 
         // マイページにリダイレクト
-        return redirect()->route('mypage', $user->id);
+        return redirect()->route('user.mypage', $user->id)->with('message', 'プロフィールを更新しました。');
     }
 
 }

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultsDiv = document.getElementById('search-results');
     const productList = document.getElementById('items-list');
     const tabsWrapper = document.querySelector('.item-tabs-wrapper'); // タブ
-    const profileImageDiv = document.getElementById('profile-upload-image'); // プロフィール画像
+    const profileImageDiv = document.getElementById('mypage-profile-area'); // プロフィール画像
     const detailWrapper = document.querySelector('.item-detail'); // 商品詳細
 
     if (!searchForm || !resultsDiv) {

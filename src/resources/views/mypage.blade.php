@@ -8,17 +8,22 @@
 
 @section('main')
 <div class="main">
-    <div id="profile-upload-image" class="profile-upload__image flex align-items-center">
-        <div class="profile-upload__image-display">
-            <img class="profile-upload__image-display--preview" id="image-preview" src="#">
+    <div id="mypage-profile-area" class="mypage-profile__image flex align-items-center">
+        <div class="mypage-profile__image-display flex center">
+            @if ($profile->image)
+            <img class="mypage-profile__image-display--preview"
+                id="mypage-image-preview"
+                src="{{ Storage::url($profile->image) }}" alt="プロフィール画像">
+            @else
+            <div class="mypage-profile__image--icon flex align-items-center center">
+                <i class="fa fa-camera"></i>
+            </div>
+            @endif
         </div>
-        <h2 class="">ユーザー名</h2>
-        <label for="image" class="profile-upload__image-label">
-            <input class="profile-upload__image-input edit-btn" type="file" id="image" name="image" accept="image/*" onchange="">
-            画像を選択する
-        </label>
-        <p class="error-message">
-        </p>
+        <h2 class="mypage-profile__user-name">{{$user->name ?? 'ユーザー名' }}</h2>
+        <a href="{{ route('mypage.profile.edit') }}" class="mypage-profile__edit-btn edit-btn">
+            プロフィールを編集
+        </a>
     </div>
     <div class="item-tabs-wrapper">
         <ul class="item-tabs flex">

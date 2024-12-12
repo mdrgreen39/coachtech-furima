@@ -6,16 +6,12 @@
 
 .item-tabs {
     list-style: none;
-    padding: 0;
-    margin-bottom: 0.25rem;
+    padding: 0 12rem;
+    margin-bottom: 0.5rem;
 }
 
 .item-tab:first-child {
-    margin-left: 2rem;
-}
-
-.item-tab {
-    margin-right: 1rem;
+    margin-right: 2rem;
 }
 
 .item-link {

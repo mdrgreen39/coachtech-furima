@@ -11,3 +11,7 @@ import './item-tabs.js';
 import './scripts.js';
 
 import './comment-count.js';
+
+import './flash-message.js';
+
+import './image-preview.js';

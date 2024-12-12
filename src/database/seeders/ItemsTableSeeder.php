@@ -16,6 +16,10 @@ class ItemsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        if (app()->environment('local') && !Storage::disk('public')->exists('items')) {
+            Storage::disk('public')->makeDirectory('items');
+        }
+
         $userIds = User::pluck('id')->toArray();
 
         $items = [

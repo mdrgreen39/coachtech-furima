@@ -109,8 +109,17 @@
         transform: scale(1.1);
     }
 
+    .item-tabs {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .item-tab {
+        margin-right: 0rem;
+    }
+
     .item-tab:first-child {
-        margin-left: 1rem;
+        margin-left: 0rem;
     }
 
     #items-list .item {
@@ -125,23 +134,17 @@
         grid-row-gap: 1.5rem;
     }
 
-        .item-detail {
-            flex-direction: column;
-            /* 縦並びに変更 */
-            align-items: center;
-            padding: 0;
-            /* 中央寄せ */
-            gap: 1rem;
-            /* 要素間の間隔を調整 */
-        }
+    .item-detail {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        gap: 1rem;
+    }
 
     .item-detail__image-container {
         width: 100%;
-        /* 画像を親要素に合わせる */
         height: auto;
-        /* 高さを自動調整 */
         max-width: 300px;
-        /* 最大幅を指定 */
     }
 
     .item-detail__info {
@@ -152,6 +155,14 @@
     #comments-section {
         max-width: 100%;
         margin-left: 0rem;
+    }
+
+    #mypage-profile-area {
+        flex-direction: column;
+    }
+
+    .mypage-profile__edit-btn {
+        margin-left: 0;
     }
 
     .main {
@@ -184,6 +195,10 @@
 
     html {
         font-size: 14px;
+    }
+
+    .flash-message {
+        margin-top: 8rem;
     }
 
     .header {
@@ -250,5 +265,11 @@
         grid-row-gap: 1.5rem;
     }
 
-    
+    .profile-upload__image {
+        padding: 0;
+    }
+
+    .mypage-profile__image {
+        padding: 0;
+    }
 }
