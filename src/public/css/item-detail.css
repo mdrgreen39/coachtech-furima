@@ -1,7 +1,7 @@
 .item-detail {
     align-items: flex-start;
     margin-top: 5rem;
-    padding: 1.5rem 5rem;
+    padding: 1.5rem 4rem;
 }
 
 /* 商品画像の設定 */
@@ -33,13 +33,13 @@
 
 /* 商品名 */
 .item-detail__name {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 /* 価格のスタイル */
 .item-detail__price {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #333;
 }
 
@@ -89,7 +89,12 @@
     padding: 0.3rem 0.5rem;
     /* 内側の余白 */
     border-radius: 10rem;
+    font-size: 0.75rem;
     /* 角を丸める */
+}
+
+.condition-span {
+    font-size: 0.75rem;
 }
 
 

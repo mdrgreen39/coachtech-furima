@@ -29,7 +29,7 @@ class UsersController extends Controller
             return response()->json(['items_html' => $html]);
         } else {
             $user = Auth::user();
-            $profile = $user->profile;
+            $profile = $user->profile ?? (object) ['image' => null];
 
             return view('mypage', compact('user', 'profile', 'items', 'currentTab'));
         }
@@ -62,18 +62,16 @@ class UsersController extends Controller
         return response()->json($items);
     }
 
-
-    // プロフィール編集画面を表示
+    // プロフィール編集画面表示
     public function editProfile()
     {
         $profile = Auth::user()->profile;
 
         if (!$profile) {
-            $profile = new Profile(); // 空のプロフィールオブジェクトを作成
+            $profile = new Profile();
         }
 
         return view('profile', compact('profile'));
-
     }
 
     // プロフィール編集処理
@@ -82,7 +80,6 @@ class UsersController extends Controller
         $user = Auth::user();
         $validated = $request->validated();
 
-        // プロフィールが存在しない場合は新しく作成
         $profile = $user->profile ?: new Profile();
 
         if ($request->hasFile('image')) {
@@ -102,16 +99,13 @@ class UsersController extends Controller
                 Storage::disk('public')->put($path, file_get_contents($request->file('image')));
             }
 
-            // すでにプロフィール画像が保存されていれば削除
             if ($profile->image) {
                 Storage::delete($profile->image);
             }
 
-            // 新しい画像のパスをデータベースに保存
             $profile->image = $path;
         }
 
-        // プロフィール情報を更新
         $profile->fill([
             'user_id' => $user->id,
             'postcode' => $validated['postcode'] ?? $profile->postcode,
@@ -120,7 +114,6 @@ class UsersController extends Controller
         ]);
         $profile->save();
 
-        // ユーザー名が変更されていれば更新
         if ($validated['name'] !== $user->name) {
             $user->update([
                 'name' => $validated['name'],

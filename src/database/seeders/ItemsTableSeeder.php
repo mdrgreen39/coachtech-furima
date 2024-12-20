@@ -37,8 +37,9 @@ class ItemsTableSeeder extends Seeder
                 . "- 使用期間1年未満\n"
                 . "- 目立つ傷や汚れなし\n",
                 'image' => 'images/items/SLR-camera.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 12],
                 'condition_id' => 3,
+
             ],
             [
                 'name' => '携帯ラジオ',
@@ -49,7 +50,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 使用感が少なくきれいです。",
                 'image' => 'images/items/radio.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 15],
                 'condition_id' => 2,
             ],
             [
@@ -61,7 +62,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 未使用に近い美品です。",
                 'image' => 'images/items/airpodspro.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 15],
                 'condition_id' => 1,
             ],
             [
@@ -73,7 +74,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- やや小傷がありますが動作良好です。",
                 'image' => 'images/items/smart-watch.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 13],
                 'condition_id' => 4,
             ],
             [
@@ -85,7 +86,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 傷や汚れはほとんどありません。",
                 'image' => 'images/items/headset.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 15],
                 'condition_id' => 3,
             ],
             [
@@ -97,7 +98,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 新品未使用品です。",
                 'image' => 'images/items/USB-C.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 13],
                 'condition_id' => 1,
             ],
             [
@@ -109,19 +110,19 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 使用感がありますが、正常に動作します。",
                 'image' => 'images/items/PC.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 13],
                 'condition_id' => 4,
             ],
             [
-                'name' => 'グラス(3個セット)',
-                'price' => 2000,
-                'description' => "シンプルなデザインのグラスセット。\n"
-                . "- 容量300ml\n"
-                . "- 食洗機対応\n"
+                'name' => '壁掛け時計',
+                'price' => 5000,
+                'description' => "シンプルでスタイリッシュな壁掛け時計。\n"
+                . "- 盤面: 透明なガラス素材\n"
+                . "- 長針と短針のみのシンプルなデザイン\n"
                 . "状態:\n"
-                . "- 未使用品です。",
-                'image' => 'images/items/glass.jpg',
-                'category_id' => 10,
+                . "- 新品、未使用\n",
+                'image' => 'images/items/wall-clock.jpg',
+                'category_ids' => [4, 17],
                 'condition_id' => 1,
             ],
             [
@@ -132,7 +133,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 軽い使用感がありますが、正常に使えます。",
                 'image' => 'images/items/padlock.jpg',
-                'category_id' => 10,
+                'category_ids' => [7, 19],
                 'condition_id' => 3,
             ],
             [
@@ -144,7 +145,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- やや使用感がありますが良好です。",
                 'image' => 'images/items/sneakers.jpg',
-                'category_id' => 6,
+                'category_ids' => [5, 10],
                 'condition_id' => 4,
             ],
             [
@@ -156,7 +157,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 使用感がありますが動作良好です。",
                 'image' => 'images/items/mouse.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 13],
                 'condition_id' => 3,
             ],
             [
@@ -168,7 +169,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- やや傷がありますが問題なく使えます。",
                 'image' => 'images/items/pot.jpg',
-                'category_id' => 10,
+                'category_ids' => [7, 16],
                 'condition_id' => 4,
             ],
             [
@@ -179,7 +180,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 新品、未使用。",
                 'image' => 'images/items/marbles.jpg',
-                'category_id' => 10,
+                'category_ids' => [7, 19],
                 'condition_id' => 1,
             ],
             [
@@ -191,7 +192,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 未使用に近い状態です。",
                 'image' => 'images/items/aroma-oil.jpg',
-                'category_id' => 10,
+                'category_ids' => [7, 19],
                 'condition_id' => 2,
             ],
             [
@@ -203,7 +204,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 使用感がありますが正常に機能します。",
                 'image' => 'images/items/measure.jpg',
-                'category_id' => 10,
+                'category_ids' => [7, 18],
                 'condition_id' => 3,
             ],
             [
@@ -215,7 +216,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- やや使用感がありますが清潔に保たれています。",
                 'image' => 'images/items/makeup-brush.jpg',
-                'category_id' => 10,
+                'category_ids' => [6, 19],
                 'condition_id' => 4,
             ],
             [
@@ -227,7 +228,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 新品、未使用。",
                 'image' => 'images/items/figurine.jpg',
-                'category_id' => 10,
+                'category_ids' => [7, 17],
                 'condition_id' => 1,
             ],
             [
@@ -239,7 +240,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 未使用に近い状態です。",
                 'image' => 'images/items/speaker.jpg',
-                'category_id' => 2,
+                'category_ids' => [2, 15],
                 'condition_id' => 2,
             ],
             [
@@ -251,7 +252,7 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- 使用感がありますが良好です。",
                 'image' => 'images/items/geta.jpg',
-                'category_id' => 1,
+                'category_ids' => [1, 10],
                 'condition_id' => 3,
             ],
             [
@@ -263,26 +264,32 @@ class ItemsTableSeeder extends Seeder
                 . "状態:\n"
                 . "- やや使用感がありますが全体的に綺麗です。",
                 'image' => 'images/items/pouch.jpg',
-                'category_id' => 1,
+                'category_ids' => [1, 11],
                 'condition_id' => 4,
             ],
 
         ];
 
-        foreach ($items as $item) {
-            $storedImagePath = $this->storeImage($item['image']);
+        foreach ($items as $itemData) {
+            $storedImagePath = $this->storeImage($itemData['image']);
 
-            DB::table('items')->insert([
-                'name' => $item['name'],
-                'price' => $item['price'],
-                'description' => $item['description'],
+            $itemId = DB::table('items')->insertGetId([
+                'name' => $itemData['name'],
+                'price' => $itemData['price'],
+                'description' => $itemData['description'],
                 'image' => $storedImagePath,
                 'user_id' => $this->getRandomUserId($userIds),
-                'category_id' => $item['category_id'],
-                'condition_id' => $item['condition_id'],
+                'condition_id' => $itemData['condition_id'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            foreach ($itemData['category_ids'] as $categoryId) {
+                DB::table('category_item')->insert([
+                    'item_id' => $itemId,
+                    'category_id' => $categoryId,
+                ]);
+            }
         }
     }
 

@@ -36,6 +36,10 @@ input::placeholder {
     color: #000000;
 }
 
+textarea {
+    white-space: pre-wrap;
+}
+
 .flex {
     display: flex;
 }

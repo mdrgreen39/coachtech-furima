@@ -10,7 +10,7 @@
 <div class="main">
     <div id="mypage-profile-area" class="mypage-profile__image flex align-items-center">
         <div class="mypage-profile__image-display flex center">
-            @if ($profile->image)
+            @if ($profile && $profile->image)
             <img class="mypage-profile__image-display--preview"
                 id="mypage-image-preview"
                 src="{{ Storage::url($profile->image) }}" alt="プロフィール画像">

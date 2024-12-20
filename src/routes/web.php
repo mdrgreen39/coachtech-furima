@@ -47,6 +47,9 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/mypage/recommend-items.json', [UsersController::class, 'getMypageItems']);
     Route::get('/items/{id}/comments', [ItemController::class, 'comments'])->name('items.comments.show');
     Route::post('/items/{id}/comments', [ItemController::class, 'storeComment'])->name('items.comments.store');
+    Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
+    Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
+
 
 
 

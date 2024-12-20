@@ -36,7 +36,7 @@
                         <p class="error-message">{{ $errors->first('image') }}</p>
                         @endif
                     </div>
-                    <div class=" profile-upload__group">
+                    <div class="profile-upload__group">
                         <label for="name" class="profile-upload__group-label">ユーザー名</label>
                         <input class="profile-upload__group-input" type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}">
                         @if ($errors->has('name'))

@@ -39,11 +39,13 @@
                 <ul>
                     <li>
                         <strong>カテゴリー</strong>
-                        <span class="category-span">{{ $item->category->name }}</span>
+                        @foreach ($item->categories as $category)
+                        <span class="category-span">{{ $category->name }}</span>
+                        @endforeach
                     </li>
                     <li>
                         <strong>商品の状態</strong>
-                        <span>{{ $item->condition->condition }}</span>
+                        <span class="condition-span">{{ $item->condition->condition }}</span>
                     </li>
                 </ul>
             </div>
