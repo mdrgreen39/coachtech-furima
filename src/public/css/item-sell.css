@@ -84,22 +84,51 @@ font-weight: bold;
     padding: 1.5rem 0;
 }
 
-.item-sell__group-label {
-    font-weight: bold;
-    text-align: left;
+.item-sell__section {
+    margin-bottom: 2rem;
+
 }
 
-.item-sell__group-input {
+.item-sell__section-title {
+    font-size: 1.5rem;
+    color: #5f5f5f;
+    margin-bottom: 1rem;
+    border-bottom: 0.13rem solid #9b9b9b;
+}
+
+.item-sell__field {
+    margin-bottom: 0.75rem;
+}
+
+.item-sell__label {
+    font-weight: bold;
+}
+
+
+/* .item-sell__group-label { */
+    /* font-weight: bold; */
+    /* text-align: left; */
+/* } */
+
+.item-sell__input {
     width: 100%;
     padding: 0.5rem;
     border: 0.06rem solid #5f5f5f;
     border-radius: 0.19rem;
 }
 
-.item-sell__group-input:focus {
+.item-sell__input:focus {
     border: 0.13rem solid #5f5f5f;
 }
 
+.description-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 0.06rem solid #5f5f5f;
+    border-radius: 0.19rem;
+    resize: none;
+    overflow: hidden;
+}
 /* .profile-upload__link { */
 /* display: block; */
 /* text-align: center; */
@@ -112,10 +141,10 @@ font-weight: bold;
 /* color: #0b2a98; */
 /* transform: scale(1.1); */
 /* } */
-textarea {
-    white-space: pre-wrap;
+/* textarea { */
+    /* white-space: pre-wrap; */
     /* 改行を保持して表示 */
-}
+/* } */
 
 .price-input-container {
     position: relative;

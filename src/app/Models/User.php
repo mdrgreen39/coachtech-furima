@@ -64,5 +64,4 @@ class User extends Authenticatable
         return $this->belongsToMany(Item::class, 'sold_item', 'user_id', 'item_id')
         ->withTimestamps();
     }
-
 }

@@ -10,8 +10,11 @@ use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Condition;
+use App\Models\Profile;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\ItemSellRequest;
+use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\AddressRequest;
 
 class ItemController extends Controller
 {
@@ -267,6 +270,80 @@ class ItemController extends Controller
         return redirect()->route('items.create')->with('message', '商品が出品されました！');
     }
 
+    // 商品購入ペー表示
+    public function purchase($itemId)
+    {
+        // 商品情報を取得
+        $item = Item::findOrFail($itemId);
+
+        // ログインしているユーザーのプロフィールを取得
+        $user = auth()->user();
+
+        // 商品がユーザーのものでないことを確認
+        if ($item->user_id == $user->id) {
+            // 自分の商品にはアクセスできないようにリダイレクト
+            return redirect()->route('item.detail', $itemId)->with('error', '自分の商品は購入できません');
+        }
+
+        // ユーザーのプロフィールを取得
+        $profile = $user->profile;
+
+        // ビューにデータを渡す
+        return view('purchase', [
+            'item' => $item,
+            'user' => $user,
+            'profile' => $profile,
+        ]);
+    }
+
+    // 商品購入処理
+    public function storePurchase(PurchaseRequest $request, $itemId)
+    {
+        $item = Item::findOrFail($itemId);
+
+        // 自分の商品を購入しようとした場合のチェック
+        if ($item->user_id === auth()->id()) {
+            return redirect()->route('item.detail', $itemId)->with('error', '自分の商品は購入できません。');
+        }
+
+        // 配送先の確認（フォームリクエストでのバリデーションに加えて安全対策として再確認）
+        $user = auth()->user();
+        if (!$user->profile || empty($user->profile->address)) {
+            return redirect()->route('profile.edit')->with('error', '配送先を登録してください');
+        }
+
+        $item->users()->attach($user->id); // これでsold_item中間テーブルに登録
+
+        return redirect()->route('item.detail', $itemId)->with('message', '購入が完了しました');
+    }
+
+    // 配送先変更画面を表示
+    public function addressEdit($itemId)
+    {
+        $user = auth()->user();
+        $profile = $user->profile;
+
+        return view('address', compact('profile', 'itemId'));
+    }
+
+    // 配送先変更処理
+    public function addressUpdate(AddressRequest $request, $itemId)
+    {
+        $user = auth()->user();
+        $profile = $user->profile;
+
+        if (!$profile) {
+            $profile = new Profile();
+            $profile->user_id = $user->id;
+        }
+
+        $profile->postcode = $request->input('postcode');
+        $profile->address = $request->input('address');
+        $profile->building = $request->input('building');
+        $profile->save();
+
+        return redirect()->route('items.purchase', $itemId)->with('message', '配送先が更新されました');
+    }
 
 
 

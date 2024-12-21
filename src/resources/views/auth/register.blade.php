@@ -15,20 +15,16 @@
             <div class="auth-form__group">
                 <label for="email" class="auth-form__group-label">メールアドレス</label>
                 <input class="auth-form__group-input" type="email" name="email" id="email" value="{{ old('email') }}">
-                <p class="error-message">
-                    @error('email')
-                    {{ $message }}
-                    @enderror
-                </p>
+                @if ($errors->has('email'))
+                <p class="error-message">{{ $errors->first('email') }}</p>
+                @endif
             </div>
             <div class="auth-form__group">
                 <label for="password" class="auth-form__group-label">パスワード</label>
                 <input class="auth-form__group-input" type="password" name="password" id="password">
-                <p class="error-message">
-                    @error('password')
-                    {{ $message }}
-                    @enderror
-                </p>
+                @if ($errors->has('password'))
+                <p class="error-message">{{ $errors->first('password') }}</p>
+                @endif
             </div>
             <button class="auth-form__btn btn" type="submit">登録する</button>
         </form>

@@ -29,7 +29,15 @@
 
                 </div>
             </div>
-            <button class="item-detail__buy-button btn">購入する</button>
+            @if ($item->isSold())
+            <p class="result-message">この商品は売れました</p>
+            @else
+            <a href="{{ route('items.purchase', $item->id) }}" class="item-detail__buy-button btn">購入する</a>
+            @endif
+
+            @if (session('error'))
+            <p class="error-message">{{ session('error') }}</p>
+            @endif
             <div class="item-detail__description">
                 <h2>商品説明</h2>
                 <p>{!! nl2br(e($item->description)) !!}</p>
@@ -51,8 +59,9 @@
             </div>
         </div>
     </div>
-    <div id=" search-results" style="display:none;">
+    <div id="search-results" style="display:none;">
 
     </div>
+
 </div>
 @endsection

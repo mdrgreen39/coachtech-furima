@@ -57,10 +57,6 @@ textarea {
     align-items: center;
 }
 
-.ml-a {
-    margin-left: auto;
-}
-
 .flash-message {
     text-align: center;
     background-color: #477efe;
@@ -199,6 +195,7 @@ textarea {
     width: 100%;
     margin: 0 auto;
     padding: 0.5rem 1rem;
+    text-align: center;
     background-color: #ff5555;
     color: #ffffff;
     font-weight: bold;

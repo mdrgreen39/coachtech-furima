@@ -25,7 +25,7 @@
                     </form>
                 </li>
                 <li class="header-nav__item"><a href="{{ route('user.mypage') }}">マイページ</a></li>
-                <li class="header-nav__item-link--btn"><a href="">出品</a></li>
+                <li class="header-nav__item-link--btn"><a href="{{ route('items.create') }}">出品</a></li>
             </ul>
         </nav>
         @else
@@ -43,7 +43,7 @@
             <ul class="flex align-items-center">
                 <li class="header-nav__item"><a href="/login">ログイン</a></li>
                 <li class="header-nav__item"><a href="/register">会員登録</a></li>
-                <li class="header-nav__item-link--btn"><a href="">出品</a></li>
+                <li class="header-nav__item-link--btn"><a href="{{ route('items.create') }}">出品</a></li>
             </ul>
         </nav>
         @endauth

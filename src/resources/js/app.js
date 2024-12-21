@@ -17,3 +17,5 @@ import './flash-message.js';
 import './image-preview.js';
 
 import './item-image-preview.js';
+
+import './purchase.js';

@@ -43,13 +43,12 @@
                                     </label>
                                 </div>
                                 @endforeach
-
-                                @if ($errors->has('categories'))
-                                <p class="error-message">{{ $errors->first('categories') }}</p>
-                                @endif
                             </div>
+                            @if ($errors->has('categories'))
+                            <p class="error-message">{{ $errors->first('categories') }}</p>
+                            @endif
                             <div class="item-sell__field">
-                                <label for="condition" class="item-sell__label">商品の状態</label>
+                                <label for="condition" class="item-sell__label flex align-items-center">商品の状態</label>
                                 <select name="condition" id="condition" class="item-sell__input">
                                     @foreach ($conditions as $condition)
                                     <option value="{{ $condition->id }}" @if (old('condition')==$condition->id) selected @endif>
@@ -57,10 +56,10 @@
                                     </option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('condition'))
-                                <p class="error-message">{{ $errors->first('condition') }}</p>
-                                @endif
                             </div>
+                            @if ($errors->has('condition'))
+                            <p class="error-message">{{ $errors->first('condition') }}</p>
+                            @endif
                         </div>
                     </div>
 
@@ -76,12 +75,12 @@
                                 @endif
                             </div>
                             <div class="item-sell__field">
-                                <label for="description" class="item-sell__label">商品の説明</label>
+                                <label for="description" class="item-sell__label  flex align-items-center">商品の説明</label>
                                 <textarea name="description" id="description" rows="5" class="description-input" required>{{ old('description') }}</textarea>
-                                @if ($errors->has('description'))
-                                <p class="error-message">{{ $errors->first('description') }}</p>
-                                @endif
                             </div>
+                            @if ($errors->has('description'))
+                            <p class="error-message">{{ $errors->first('description') }}</p>
+                            @endif
                         </div>
                     </div>
 
@@ -94,10 +93,10 @@
                                     <span class="currency-symbol">¥</span>
                                     <input type="text" name="price" id="price" class="item-sell__input" value="{{ old('price') }}">
                                 </div>
-                                @if ($errors->has('price'))
-                                <p class="error-message">{{ $errors->first('price') }}</p>
-                                @endif
                             </div>
+                            @if ($errors->has('price'))
+                            <p class="error-message">{{ $errors->first('price') }}</p>
+                            @endif
                         </div>
                     </div>
 

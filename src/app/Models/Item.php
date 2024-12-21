@@ -14,9 +14,10 @@ class Item extends Model
         'id',
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'sold_item', 'item_id', 'user_id')
+        ->withTimestamps();
     }
 
     public function getImageUrlAttribute()
@@ -46,9 +47,20 @@ class Item extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function users()
+    public function soldItems()
     {
-        return $this->belongsToMany(User::class, 'sold_item', 'item_id', 'user_id')
-        ->withTimestamps();
+        return $this->hasMany(SoldItem::class, 'item_id', 'id');
     }
+
+    public function buyers()
+    {
+        // アイテムを購入したユーザー（中間テーブルを通して多対多）
+        return $this->hasManyThrough(User::class, SoldItem::class);
+    }
+
+    public function isSold()
+    {
+        return $this->soldItems()->exists();
+    }
+
 }

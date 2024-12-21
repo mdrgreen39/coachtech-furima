@@ -49,6 +49,11 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/items/{id}/comments', [ItemController::class, 'storeComment'])->name('items.comments.store');
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
     Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/purchase/{itemId}', [ItemController::class, 'purchase'])->name('items.purchase');
+    Route::post('/purchase/{itemId}', [ItemController::class, 'storePurchase'])->name('items.storePurchase');
+    Route::get('address/{item_id}', [ItemController::class, 'addressEdit'])->name('address.edit');
+    Route::post('address/{item_id}', [ItemController::class, 'addressUpdate'])->name('address.update');
+
 
 
 
